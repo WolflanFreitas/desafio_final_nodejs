@@ -1,8 +1,8 @@
 import Sequelize from 'sequelize';
 import database from '../config/config'
-import Book from './Book';
+import Author from './Author';
 
-const Author = database.define('author', {
+const Book = database.define('book', {
     id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -21,6 +21,14 @@ const Author = database.define('author', {
         type: Sequelize.STRING(100),
         allowNull: false
     },
+    value: {
+        type: Sequelize.FLOAT(10,2),
+        allowNull: false
+    },
+    quantity: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+    },
     createdAt: {
         type: Sequelize.DATE,
         defaultValue: Sequelize.fn('now'),
@@ -33,6 +41,6 @@ const Author = database.define('author', {
     }
 });
 
-Author.hasMany(Book);
+Book.belongsTo(Author);
 
-export default Author;
+export default Book;
