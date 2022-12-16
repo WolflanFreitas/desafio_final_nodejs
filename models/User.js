@@ -34,10 +34,12 @@ const User = database.define('user', {
     },
     createdAt: {
         type: Sequelize.DATE,
+        defaultValue: Sequelize.fn('now'),
         allowNull: false
     },
     updatedAt: {
         type: Sequelize.DATE,
+        defaultValue: Sequelize.fn('now'),
         allowNull: false
     }
 });
