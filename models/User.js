@@ -1,5 +1,5 @@
-const Sequelize = require('sequelize');
-const database = require('../config/config.js');
+import Sequelize from 'sequelize';
+import database from '../config/config'
 
 const User = database.define('User', {
     id: {
@@ -31,5 +31,15 @@ const User = database.define('User', {
     role: {
         type: Sequelize.ENUM('admin','client'),
         allowNull: false
+    },
+    createdAt: {
+        type: Sequelize.DATE,
+        allowNull: false
+    },
+    updatedAt: {
+        type: Sequelize.DATE,
+        allowNull: false
     }
 });
+
+export default User;

@@ -33,6 +33,16 @@ module.exports = {
       role: {
         type: Sequelize.ENUM('admin','client'),
         defaultValue: 'client'
+      },
+      createdAt: {
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.fn('now'),
+        allowNull: false
+      },
+      updatedAt: {
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.fn('now'),
+        allowNull: false
       }
     });
   },
