@@ -15,3 +15,7 @@
 
     1. Remover todas as tabelas: `npx sequelize-cli db:migrate:undo:all`;
     2. Criar todas as tabelas: `npx sequelize-cli db:migrate`.
+
+## Criar migração Prisma JS
+
+    1. `npx prisma migrate dev --name init`
