@@ -16,9 +16,10 @@ model User {
   email     String   @unique
   password  String
   phone     String
+  role      Role     @default(USER)
+  Sale      Sale[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  Sale      Sale[]
 }
 
 model Author {
@@ -51,4 +52,9 @@ model Sale {
   userId Int
   book   Book     @relation(fields: [bookId], references: [id])
   bookId Int
+}
+
+enum Role {
+  USER
+  ADMIN
 }
