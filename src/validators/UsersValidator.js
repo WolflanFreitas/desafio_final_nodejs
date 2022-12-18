@@ -20,7 +20,6 @@ class UsersValidator {
                 .isEmpty()
                 .withMessage('Email can not be empty!')
                 .bail()
-                .not()
                 .isEmail()
                 .withMessage('Invalid email address!')
                 .bail(),
@@ -31,7 +30,7 @@ class UsersValidator {
                 .withMessage('Password can not be empty!')
                 .bail()
                 .isLength({min: 8})
-                .withMessage('Minimum 3 characters required!')
+                .withMessage('Minimum 8 characters required!')
                 .bail(),
             check('phone')
                 .trim()
