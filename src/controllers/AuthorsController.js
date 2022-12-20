@@ -80,9 +80,6 @@ class AuthorsController {
     async getAll(req, res) {
         try {
             const authors = await prisma.author.findMany();
-            authors.map((author) => {
-                delete author.password;
-            });
             return res.status(200).json({authors});
         } catch(err) {
             console.error(err);
