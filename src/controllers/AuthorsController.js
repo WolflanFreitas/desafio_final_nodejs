@@ -56,12 +56,21 @@ class AuthorsController {
     async delete(req, res) {
         try {
             const authorId = parseInt(req.params.id);
-            await prisma.author.delete({
+            const author =  await prisma.author.findUnique({
                 where: {
                     id: authorId
                 }
             });
-            return res.status(200).json({message: `Author deleted id: ${authorId}`});
+            if(author) {
+                await prisma.author.delete({
+                    where: {
+                        id: authorId
+                    }
+                });
+                return res.status(200).json({message: `Author deleted id: ${authorId}`});
+            } else {
+                return res.status(404).json({message: "Author not found!"});
+            }
         } catch(err) {
             console.error(err);
             return res.status(500).json({error: "Internal server error."});

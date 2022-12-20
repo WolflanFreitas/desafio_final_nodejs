@@ -62,12 +62,21 @@ class UsersController {
     async delete(req, res) {
         try {
             const userId = parseInt(req.params.id);
-            await prisma.user.delete({
+            const user =  await prisma.user.findUnique({
                 where: {
                     id: userId
                 }
             });
-            return res.status(200).json({message: `User deleted id: ${userId}`});
+            if(user) {
+                await prisma.user.delete({
+                    where: {
+                        id: userId
+                    }
+                });
+                return res.status(200).json({message: `User deleted id: ${userId}`});
+            } else {
+                return res.status(404).json({message: "User not found!"})
+            }
         } catch(err) {
             console.error(err);
             return res.status(500).json({error: "Internal server error."});
