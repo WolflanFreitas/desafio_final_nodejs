@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import BookInfo from "../models/BookInfo";
 
 const prisma = new PrismaClient();
 
@@ -92,12 +93,16 @@ class BooksController {
     async getOne(req, res) {
         try {
             const bookId = parseInt(req.params.id);
-            const book =  await prisma.book.findUnique({
+            let book =  await prisma.book.findUnique({
                 where: {
                     id: bookId
                 }
             });
             if(book) {
+                const info = BookInfo.findOne({
+                    bookId
+                });
+                book = {...book, info}
                 return res.status(200).json({book});
             } else {
                 return res.status(404).json({message: "Book not found!"});
