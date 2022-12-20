@@ -77,6 +77,9 @@ class UsersController {
     async getAll(req, res) {
         try {
             const users = await prisma.user.findMany();
+            users.map((user) => {
+                delete user.password;
+            });
             return res.status(200).json({users});
         } catch(err) {
             console.error(err);
@@ -93,6 +96,7 @@ class UsersController {
                 }
             });
             if(user) {
+                delete user.password;
                 return res.status(200).json({user});
             } else {
                 return res.status(404).json({message: "User not found!"})
