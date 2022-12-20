@@ -38,7 +38,7 @@ class UsersController {
             if(!user) {
                 return res.status(404).json("User not found!");
             }
-            
+
             await prisma.user.update({
                 where: {
                     id: userId
@@ -53,6 +53,50 @@ class UsersController {
                 }
             });
             return res.status(204).json({message: "User updated!"});
+        } catch(err) {
+            console.error(err);
+            return res.status(500).json({error: "Internal server error."});
+        }
+    }
+
+    async delete(req, res) {
+        try {
+            const userId = parseInt(req.params.id);
+            const deleteUser = await prisma.user.delete({
+                where: {
+                    id: userId
+                }
+            });
+            return res.status(200).json({message: `User deleted id: ${userId}`});
+        } catch(err) {
+            console.error(err);
+            return res.status(500).json({error: "Internal server error."});
+        }
+    }
+
+    async getAll(req, res) {
+        try {
+            const users = await prisma.user.findMany();
+            return res.status(200).json({users});
+        } catch(err) {
+            console.error(err);
+            return res.status(500).json({error: "Internal server error."});
+        }
+    }
+
+    async getOne(req, res) {
+        try {
+            const userId = parseInt(req.params.id);
+            const user =  await prisma.user.findUnique({
+                where: {
+                    id: userId
+                }
+            });
+            if(user) {
+                return res.status(200).json({user});
+            } else {
+                return res.status(404).json({message: "User not found!"})
+            }
         } catch(err) {
             console.error(err);
             return res.status(500).json({error: "Internal server error."});
