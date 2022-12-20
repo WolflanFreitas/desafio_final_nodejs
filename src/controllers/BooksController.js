@@ -82,7 +82,17 @@ class BooksController {
 
     async getAll(req, res) {
         try {
-            const books = await prisma.book.findMany();
+            const authorId = parseInt(req.query.authorId);
+            let books;
+            if(authorId) {
+                books = await prisma.book.findMany({
+                    where: {
+                        authorId
+                    }
+                })
+            } else {
+                books = await prisma.book.findMany();
+            }
             return res.status(200).json({books});
         } catch(err) {
             console.error(err);
