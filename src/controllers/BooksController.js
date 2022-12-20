@@ -109,7 +109,7 @@ class BooksController {
                 }
             });
             if(book) {
-                const info = BookInfo.findOne({
+                const info = await BookInfo.findOne({
                     bookId
                 });
                 book = {...book, info}
@@ -117,6 +117,22 @@ class BooksController {
             } else {
                 return res.status(404).json({message: "Book not found!"});
             }
+        } catch(err) {
+            console.error(err);
+            return res.status(500).json({error: "Internal server error."});
+        }
+    }
+
+    async createBookInfo(req, res) {
+        try {
+            const {bookId, description, countPages, publishingCompany, comments} = req.body;
+            await BookInfo.create({
+                bookId,
+                description,
+                countPages,
+                publishingCompany,
+                comments
+            });
         } catch(err) {
             console.error(err);
             return res.status(500).json({error: "Internal server error."});

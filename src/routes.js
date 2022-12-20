@@ -32,4 +32,6 @@ routes.post('/books',BooksValidator.create(), BooksController.create);
 routes.put('/books/:id',BooksValidator.create(), BooksController.update);
 routes.delete('/books/:id', BooksController.delete);
 
+//BooksInfo routes
+routes.get('/books',BooksController.createBookInfo);
 export default routes;
