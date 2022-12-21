@@ -9,6 +9,8 @@ import AuthorsValidator from './validators/AuthorsValidator';
 import BooksController from './controllers/BooksController';
 import BooksValidator from './validators/BooksValidator';
 
+import SalesController from './controllers/SalesController';
+
 const routes = new Router();
 
 //Users routes
@@ -41,4 +43,6 @@ routes.delete('/books/info/delete/:id',BooksController.deleteBookInfo);
 routes.post('/books/:id/comment',BooksController.createBookInfoComment);
 routes.delete('/books/:id/comment/:index',BooksController.deleteBookInfoComment);
 
+//Sales routes
+routes.post('/sales',SalesController.create);
 export default routes;
