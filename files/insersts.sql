@@ -36,55 +36,55 @@ insert into sale (value, date, userId, bookId) values (45, '2000-12-14', 5, 3);
 /* Os documentos abaixo devem ser criados no MongoDB */
 
 {
-    "livroId": 1,
-    "descricao": "O livro trata a respeito de criação de APIs com Node.js, levando ao leitor os principais conceitos necessários para a implementação",
-    "paginas": 250,
-    "editora": "Editora IGTI",    
-    "avaliacoes": [
+    "bookId": 1,
+    "description": "O livro trata a respeito de criação de APIs com Node.js, levando ao leitor os principais conceitos necessários para a implementação",
+    "countPages": 250,
+    "publishingCompany": "Editora IGTI",    
+    "comments": [
     ] 
 }
 
 {
-    "livroId": 2,
-    "descricao": "O livro passa uma visão geral sobre o JavaScript moderno, quais as principais estruturas e exemplos de utilização",
-    "paginas": 350,
-    "editora": "Editora IGTI",    
-    "avaliacoes": [
+    "bookId": 2,
+    "description": "O livro passa uma visão geral sobre o JavaScript moderno, quais as principais estruturas e exemplos de utilização",
+    "countPages": 350,
+    "publishingCompany": "Editora IGTI",    
+    "comments": [
     ] 
 }
 
 {
-    "livroId": 3,
-    "descricao": "O livro demonstra na prática a utilização do Express em conjunto com o Node.js para criação de APIs",
-    "paginas": 150,
-    "editora": "Editora IGTI",    
-    "avaliacoes": [
+    "bookId": 3,
+    "description": "O livro demonstra na prática a utilização do Express em conjunto com o Node.js para criação de APIs",
+    "countPages": 150,
+    "publishingCompany": "Editora IGTI",    
+    "comments": [
     ] 
 }
 
 {
-    "livroId": 4,
-    "descricao": "O livro aborda na teoria e na prática os bancos de dados relacionais, desde a sua motivação até a construção e consulta de registros",
-    "paginas": 450,
-    "editora": "Editora IGTI",    
-    "avaliacoes": [
+    "bookId": 4,
+    "description": "O livro aborda na teoria e na prática os bancos de dados relacionais, desde a sua motivação até a construção e consulta de registros",
+    "countPages": 450,
+    "publishingCompany": "Editora IGTI",    
+    "comments": [
     ] 
 }
 
 {
-    "livroId": 5,
-    "descricao": "O livro faz uma introdução aos bancos de dados NoSQL, em especial os bancos de dados orientados a documentos",
-    "paginas": 100,
-    "editora": "Editora IGTI",    
-    "avaliacoes": [
+    "bookId": 5,
+    "description": "O livro faz uma introdução aos bancos de dados NoSQL, em especial os bancos de dados orientados a documentos",
+    "countPages": 100,
+    "publishingCompany": "Editora IGTI",    
+    "comments": [
     ] 
 }
 
 {
-    "livroId": 6,
-    "descricao": "O livro aborda na teoria a importância e utilização da autorização e autenticação em APIs com Node.js e Express",
-    "paginas": 90,
-    "editora": "Editora IGTI",    
-    "avaliacoes": [
+    "bookId": 6,
+    "description": "O livro aborda na teoria a importância e utilização da autorização e autenticação em APIs com Node.js e Express",
+    "countPages": 90,
+    "publishingCompany": "Editora IGTI",    
+    "comments": [
     ] 
 }

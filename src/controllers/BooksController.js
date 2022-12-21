@@ -126,13 +126,87 @@ class BooksController {
     async createBookInfo(req, res) {
         try {
             const {bookId, description, countPages, publishingCompany, comments} = req.body;
-            await BookInfo.create({
-                bookId,
-                description,
-                countPages,
-                publishingCompany,
-                comments
+            
+            const book = await prisma.book.findUnique({
+                where: {
+                    id: bookId
+                }
             });
+
+            if(book) {
+                const hasBookInfo = await BookInfo.findOne({bookId});
+                if(hasBookInfo) {
+                    return res.status(500).json({message: "Book already has bookInfo!"});
+                }
+                await BookInfo.create({
+                    bookId,
+                    description,
+                    countPages,
+                    publishingCompany,
+                    comments
+                });
+                return res.status(201).json({message: "BookInfo created!"});
+            } else {
+                return res.status(404).json({message: "Book not found!"});
+            }
+        } catch(err) {
+            console.error(err);
+            return res.status(500).json({error: "Internal server error."});
+        }
+    }
+
+    async updateBookInfo(req, res) {
+        try {
+            const bookId = parseInt(req.params.id);
+            const {description, countPages, publishingCompany, comments} = req.body;
+            
+            const book = await prisma.book.findUnique({
+                where: {
+                    id: bookId
+                }
+            });
+
+            if(book) {
+                const hasBookInfo = await BookInfo.findOne({bookId});
+                if(hasBookInfo) {
+                    await BookInfo.updateOne({bookId},{
+                        description,
+                        countPages,
+                        publishingCompany,
+                        comments
+                    });
+                    return res.status(200).json({message: "BookInfo updated!"});
+                }
+                return res.status(404).json({message: "No bookInfo founded!"});
+            } else {
+                return res.status(404).json({message: "Book not found!"});
+            }
+        } catch(err) {
+            console.error(err);
+            return res.status(500).json({error: "Internal server error."});
+        }
+    }
+
+    async deleteBookInfo(req, res) {
+        try {
+            const bookId = parseInt(req.params.id);
+
+            const book = await prisma.book.findUnique({
+                where: {
+                    id: bookId
+                }
+            });
+
+            if(book) {
+                const hasBookInfo = await BookInfo.findOne({bookId});
+                if(hasBookInfo) {
+                    await BookInfo.deleteOne({bookId});
+                    return res.status(200).json({message: "BookInfo deleted!"});
+                }
+                return res.status(404).json({message: "No bookInfo founded!"});
+            } else {
+                return res.status(404).json({message: "Book not found!"});
+            }
         } catch(err) {
             console.error(err);
             return res.status(500).json({error: "Internal server error."});
