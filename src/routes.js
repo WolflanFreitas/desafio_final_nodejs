@@ -39,5 +39,6 @@ routes.delete('/books/info/delete/:id',BooksController.deleteBookInfo);
 
 //BooksInfo.comments routes
 routes.post('/books/:id/comment',BooksController.createBookInfoComment);
+routes.delete('/books/:id/comment/:index',BooksController.deleteBookInfoComment);
 
 export default routes;

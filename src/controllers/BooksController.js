@@ -245,6 +245,38 @@ class BooksController {
             return res.status(500).json({error: "Internal server error."});
         }
     }
+
+    async deleteBookInfoComment(req, res) {
+        try {
+            const bookId = parseInt(req.params.id);
+            const commentIndex = parseInt(req.params.index);
+
+            const book = await prisma.book.findUnique({
+                where: {
+                    id: bookId
+                }
+            });
+
+            if(book) {
+                const bookInfo = await BookInfo.findOne({bookId});
+                if(bookInfo) {
+                    if(commentIndex < bookInfo.comments.length) {
+                        bookInfo.comments.splice(commentIndex,1);
+                        bookInfo.save();
+                        return res.status(200).json({message: "Comment deleted!"});
+                    } else {
+                        return res.status(406).json({message: "Comment index not found!"});
+                    }
+                }
+                return res.status(404).json({message: "No bookInfo founded!"});
+            } else {
+                return res.status(404).json({message: "Book not found!"});
+            }
+        } catch(err) {
+            console.error(err);
+            return res.status(500).json({error: "Internal server error."});
+        }
+    }
 }
 
 export default new BooksController();
