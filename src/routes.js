@@ -38,5 +38,6 @@ routes.put('/books/info/update/:id', BooksController.updateBookInfo);
 routes.delete('/books/info/delete/:id',BooksController.deleteBookInfo);
 
 //BooksInfo.comments routes
+routes.post('/books/:id/comment',BooksController.createBookInfoComment);
 
 export default routes;
