@@ -5,6 +5,7 @@ insert into user (name, email, password, phone, address) values ('Gael Geraldo d
 insert into user (name, email, password, phone, address) values ('Francisca Isabel Vieira', 'franvieira@gmail.com', 'kW1bnjci70', '85827093319', 'Rua Dom Henrique 182, São Luís-MA');
 insert into user (name, email, password, phone, address) values ('Sarah Carolina da Conceição', 'ssarahcarolinadaconceicao@gmail.com', '54bOsJjloe', '71387384988', 'Rua Poeta Evaristo de Souza 460, Natal-RN');
 insert into user (name, email, password, phone, address) values ('Vitor Martin Pinto', 'vvitormartinpinto@gmail.com', 'GGh0SmQ5Wo', '13720467392', 'Rua Quarenta e Nove 356, São Luís-MA');
+insert into user (name, email, password, phone, address, role) values ('admin', 'admin@gmail.com', 'desafio-igti-nodejs', '53720427392', 'Rua 203 NE, Nº 02, São Luís-MA', 'ADMIN');
 
 insert into author (name, email, phone) values ('Carolina Milena Almada', 'ccarolinamilenaalmada@gmail.com', '83996565550');
 insert into author (name, email, phone) values ('Yago Raul da Rocha', 'yyagorauldarocha@gmail.com', '63987932013');
