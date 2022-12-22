@@ -26,7 +26,7 @@ class SalesController {
                     const sale = await prisma.sale.create({
                         data: {
                             value: book.value,
-                            date,
+                            date: new Date(date),
                             userId,
                             bookId
                         }
