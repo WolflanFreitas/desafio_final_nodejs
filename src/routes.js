@@ -45,4 +45,7 @@ routes.delete('/books/:id/comment/:index',BooksController.deleteBookInfoComment)
 
 //Sales routes
 routes.post('/sales',SalesController.create);
+routes.get("/sales",SalesController.getAll);
+routes.get("/sales/:id",SalesController.getOne);
+
 export default routes;

@@ -105,11 +105,40 @@ class SalesController {
 
     async getAll(req, res) {
         try {
-            const sales = await prisma.sale.findMany();
-            sales.map((sale) => {
-                delete sale.password;
-            });
-            return res.status(200).json({sales});
+            const userId = parseInt(req.query.userId);
+            const bookId = parseInt(req.query.bookId);
+            const authorId = parseInt(req.query.authorId);
+
+            let sales;
+
+            if(userId) {
+                sales = await prisma.sale.findMany({
+                    where: {
+                        userId
+                    }
+                });
+                return res.status(200).json(sales);
+            } 
+            if(bookId) {
+                sales = await prisma.sale.findMany({
+                    where: {
+                        bookId: bookId
+                    }
+                });
+                return res.status(200).json(sales);
+            }
+            if(authorId) {
+                sales = await prisma.sale.findMany({
+                    where: {
+                        book: {
+                            authorId: authorId
+                        }
+                    }
+                });
+                return res.status(200).json(sales);
+            }
+            sales = await prisma.sale.findMany();
+            return res.status(200).json(sales);
         } catch(err) {
             console.error(err);
             return res.status(500).json({error: "Internal server error."});
@@ -125,10 +154,9 @@ class SalesController {
                 }
             });
             if(sale) {
-                delete sale.password;
-                return res.status(200).json({sale});
+                return res.status(200).json(sale);
             } else {
-                return res.status(404).json({message: "Sale not found!"})
+                return res.status(404).json({message: "Sale not found!"});
             }
         } catch(err) {
             console.error(err);
