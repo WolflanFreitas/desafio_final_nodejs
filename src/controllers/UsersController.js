@@ -27,8 +27,19 @@ class UsersController {
     async update (req, res) {
         try {
             const userId = parseInt(req.params.id);
-            const {name, email, password, phone, address, role} = req.body;
+            const {name, email, password, phone, address} = req.body;
             
+            const currentUser = await prisma.user.findFirst({
+                where: {
+                    email: req.auth.user,
+                    password: req.auth.password
+                }
+            });
+
+            if(currentUser.role !== "ADMIN" && currentUser.id !== userId) {
+                return res.status(403).json({message: "You don't have permission to update this user!"});
+            }
+
             const user = await prisma.user.findUnique({
                 where: {
                     id: userId
@@ -48,8 +59,7 @@ class UsersController {
                     email,
                     password,
                     phone,
-                    address,
-                    role
+                    address
                 }
             });
             return res.status(204).json({message: "User updated!"});
@@ -115,6 +125,7 @@ class UsersController {
             return res.status(500).json({error: "Internal server error."});
         }
     }
+        
 }
 
 export default new UsersController();

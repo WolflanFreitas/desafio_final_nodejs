@@ -7,6 +7,18 @@ class SalesController {
     async create (req, res) {
         try {
             const {date, userId, bookId} = req.body;
+
+            const currentUser = await prisma.user.findFirst({
+                where: {
+                    email: req.auth.user,
+                    password: req.auth.password
+                }
+            });
+
+            if(currentUser.role !== "ADMIN" && currentUser.id !== userId) {
+                return res.status(403).json({message: "You don't have permission to update this user!"});
+            }
+
             const book = await prisma.book.findUnique({
                 where: {
                     id: bookId
@@ -108,6 +120,17 @@ class SalesController {
             const userId = parseInt(req.query.userId);
             const bookId = parseInt(req.query.bookId);
             const authorId = parseInt(req.query.authorId);
+
+            const currentUser = await prisma.user.findFirst({
+                where: {
+                    email: req.auth.user,
+                    password: req.auth.password
+                }
+            });
+
+            if(currentUser.role !== "ADMIN" && userId && currentUser.id !== userId) {
+                return res.status(403).json({message: "You don't have permission to update this user!"});
+            }
 
             let sales;
 
